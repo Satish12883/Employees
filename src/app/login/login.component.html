@@ -1,0 +1,33 @@
+<div style="text-align: center;">
+    <table align="center">
+        <tr>
+            <td><label>FirstName</label></td>
+            <td>:</td>
+            <td><input type="text" id="txtFN"> </td>
+        </tr>
+        <tr>
+            <td><label>LastName</label></td>
+            <td>:</td>
+            <td><input type="text" id="txtLN" required></td>
+        </tr>
+        <tr>
+            <td><label>Gender</label></td>
+            <td>:</td>
+            <td align="left">&nbsp;
+                <input type="radio" id="rdbMale" value="Male" name="gender">&nbsp;
+                <input type="radio" id="rdbFM" value="Female" name="gender">
+            </td>
+        </tr>
+        <tr>
+            <td><label>Address</label></td>
+            <td>:</td>
+            <td><input type="text" id="txtAdd"></td>
+        </tr>
+    </table>
+<input type="button" id="btnSave" value="Save" class="btn btn-success">
+</div>
+<div>
+    <h5 id="Msg"> {{ name }}</h5>
+<p>Age: {{ age }}</p>
+<p>{{address}}</p>
+</div>
