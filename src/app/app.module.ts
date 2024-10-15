@@ -1,23 +1,16 @@
-
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms'; 
-import { HttpClient } from '@angular/common/http';
+import { ServiceAPIService } from './service-api.service';
 
-import { AppComponent } from './app.component';
-import { ServiceAPIService } from './service-api.service'; 
 
 @NgModule({
-  declarations: [
-    
-    AppComponent
-  ],
+  declarations: [],
   imports: [
+    CommonModule,
     BrowserModule,
-    FormsModule,
-    HttpClient
   ],
-  providers: [], 
-  bootstrap: [AppComponent] 
+  providers: [ServiceAPIService], // Add services here, if any
+  bootstrap: []
 })
-export class AppModule { }
+export class AppModuleTsModule { }

@@ -98,7 +98,9 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js"
+            ]
           }
         }
       }
@@ -107,4 +109,6 @@
   "cli": {
     "analytics": "6b164232-48e2-4001-b873-b2f6242102fb"
   }
+  
+
 }

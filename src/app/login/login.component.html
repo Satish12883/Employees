@@ -1,9 +1,17 @@
-<div style="text-align: center;">
+<div style="text-align: center;display: none;">
     <table align="center">
+       <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+       </thead>
+       <tbody>
         <tr>
             <td><label>FirstName</label></td>
             <td>:</td>
-            <td><input type="text" id="txtFN"> </td>
+            <td><input type="text" id="txtFN" value="satish" #inputFistName> </td>
         </tr>
         <tr>
             <td><label>LastName</label></td>
@@ -23,10 +31,70 @@
             <td>:</td>
             <td><input type="text" id="txtAdd"></td>
         </tr>
+       </tbody>
     </table>
 <input type="button" id="btnSave" value="Save" class="btn btn-success">
 </div>
-<div>
+
+<div id="MainDiv">
+    <div id="divForm">
+        <label id="ErrorMsg"></label><br><br>
+        <label>userId:</label>&nbsp;
+         <input type="text" id="lblUserId" size="1px"><br>
+        <label>FirstName:</label><br>
+        <input type="text" id="txtFirstName"><br>
+        <label>LastName:</label><br>
+        <input type="text" id="txtLName"><br>
+        <label>Age:</label><br>
+        <input type="text" id="txtAge"><br>
+        <label>Gender:</label><br>
+        <input type="radio" id="rdbMale" value="Male" name="Gender">Male&nbsp;
+        <input type="radio" id="rdbFeMale" value="Female" name="Gender">Female<br>
+        <label>Contact:</label><br>
+        <input type="text" id="txtCont"><br>
+        <label>Address:</label><br>
+        <textarea id="txtAdd"></textarea><br>
+        <label>Image:</label>
+        <input type="file" id="fileupload"><br><br>        
+        <input type="button" id="btnSave" (click)="SaveUsers()" value="Save">
+    
+    </div>   
+</div><br>
+<div style="width: 100%;display: flex;justify-content: center;">
+    <a href="#" id="ancUsers" (click)="getData()">Show</a>
+    <div id="tblDiv" style="display: none;text-align: center;">
+        <table class="tblUsers">
+            <thead>
+                <tr>
+                <th>UserId</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>contact</th>
+                <td>Address</td>
+                <th></th>
+                <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td>{{user.userId}}</td>
+                    <td><a href="#" (click)="navigateToUser(user.userId)" id="btnView">{{user.firstName}}</a></td>
+                    <td>{{user.lastName}}</td>    
+                    <td>{{user.age}}</td>            
+                    <td>{{user.gender}}</td>
+                    <td>{{user.contact}}</td>
+                    <td>{{user.address}}</td>
+                     <td><a href="#" id="btnEdit" (click)="editUser(user.userId)">Edit</a> </td>
+                    <td><a href="#" id="btnDelete" (click)="DeleteUser(user.userId)">Delete</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div style="display: none;">
     <h5 id="Msg"> {{ name }}</h5>
 <p>Age: {{ age }}</p>
 <p>{{address}}</p>
