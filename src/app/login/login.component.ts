@@ -1,10 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ServiceAPIService } from '../service-api.service';
 import { CommonModule } from '@angular/common';
-import { response } from 'express';
 import { Router } from '@angular/router';
-import { first, Observable } from 'rxjs';
 import { UsersDTO } from './UsersDTO';
+import { FormControl,FormGroup,Validators } from '@angular/forms';
 import { error } from 'console';
 declare var $:any;
 
@@ -16,6 +15,12 @@ declare var $:any;
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  userForm=new FormGroup({
+    name:new FormControl('',Validators.required)
+  })
+
+
+
   constructor(private service:ServiceAPIService,private route:Router){}
   users:any;
   usersById:any;

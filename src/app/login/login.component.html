@@ -38,9 +38,10 @@
 
 <div id="MainDiv">
     <div id="divForm">
+        <form>
         <label id="ErrorMsg"></label><br><br>
-        <label>userId:</label>&nbsp;
-         <input type="text" id="lblUserId" size="1px"><br>
+        <label for="name">userId:</label>&nbsp;
+         <input type="text" id="lblUserId" name="name"size="1px"><br>
         <label>FirstName:</label><br>
         <input type="text" id="txtFirstName"><br>
         <label>LastName:</label><br>
@@ -58,6 +59,7 @@
         <input type="file" id="fileupload"><br><br>        
         <input type="button" id="btnSave" (click)="SaveUsers()" value="Save">
     
+        </form>
     </div>   
 </div><br>
 <div style="width: 100%;display: flex;justify-content: center;">
