@@ -56,7 +56,7 @@
         <label>Address:</label><br>
         <textarea id="txtAdd"></textarea><br>
         <label>Image:</label>
-        <input type="file" id="fileupload"><br><br>        
+        <input type="file" id="fileupload" accept="image/*" (change)="onFilesSelected($event)"><br><br>        
         <input type="button" id="btnSave" (click)="SaveUsers()" value="Save">
     
         </form>

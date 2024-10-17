@@ -13,7 +13,7 @@ declare var $:any;
   styleUrl: './user.component.scss'
 })
 export class UserComponent {
-  
+  userImagePath: any = 'assets/user.jpg'; 
   constructor(private service:ServiceAPIService,private route:ActivatedRoute){}
   result:any;
   userId:any;
@@ -21,7 +21,7 @@ export class UserComponent {
     this.getUserFiles();
   }
   getUserFiles(){
-    var content:any
+    
     this.route.params.subscribe(params=>{
       this.userId=params['id'];
     });
@@ -29,33 +29,29 @@ export class UserComponent {
       alert("Invalid User ID ");
       return;
     }
-    this.service.getUserFiles(this.userId,'DBM').then(data=>{
+     this.service.getUserFiles(this.userId,'DBM').then(data=>{
       this.result=data;
 
-      // if(this.result.ResultData.length==0){
-      //   alert("No details Found");
-      //   return;
-      // }
-      // else if(this.result.ErrorDescription=="Data Not Found"){
-      //   $('#MainDiv').css('display','none');
-      //   alert("No details Found");
-      //   return;
-      // }
-
       $('#MainDiv').css('display','flex');
-      content=this.result.ResultData[0].content;
-      var fileName=this.result.ResultData[0].fileName;
-      var imgPath="data:image/png;base64,"+content;
-      var creationDate=new Date(this.result.ResultData[0].creationDate);
-      var formattedDate = creationDate.toLocaleDateString();
-      $('#userImg').attr('src',imgPath);
+      var content:any=this.result.ResultData[0].image;
+      var fileName=this.result.ResultData[0].last_name+" "+this.result.ResultData[0].first_name;
+      var formattedDate=new Date().getMonth()+"/"+new Date().getDate()+"/"+new Date().getFullYear();
+      if(content!=null&&content!=""||content!=undefined){
+        $('#userImg').attr('src',content);
+        $('#lblCreationDate').text(formattedDate);
+        $('#lblFileName').text(fileName);
+      }
+      else{
+        $('#userImg').attr('src',this.userImagePath);
+        $('#lblCreationDate').text(formattedDate);
+        $('#lblFileName').text('user');
+      }
+      
       $('#lblAge').text(this.result.ResultData[0].age);
       $('#lblGender').text(this.result.ResultData[0].gender);
-      $('#lblUserName').text(this.result.ResultData[0].fullName);
-      $('#lblAdd').text(this.result.ResultData[0].address);
-      $('#lblCreationDate').text(formattedDate);
-      $('#lblFileName').text(fileName);
-      console.log(this.result.ResultData[0].fileName);
+      $('#lblUserName').text(this.result.ResultData[0].first_name+" ("+this.userId+")");
+      $('#lblAdd').text(this.result.ResultData[0].address);      
+      console.log(this.userId);
     })
 
   }

@@ -1,9 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ServiceAPIService } from '../service-api.service';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { UsersDTO } from './UsersDTO';
-import { FormControl,FormGroup,Validators } from '@angular/forms';
+import { FormControl,FormGroup,Validators,FormBuilder } from '@angular/forms';
 import { error } from 'console';
 declare var $:any;
 
@@ -15,17 +15,15 @@ declare var $:any;
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+ filePath:any;
   userForm=new FormGroup({
     name:new FormControl('',Validators.required)
   })
-
-
 
   constructor(private service:ServiceAPIService,private route:Router){}
   users:any;
   usersById:any;
   result:any;
-  filePath:any;
   
   ngOnInit(){
    //this.getData();
@@ -76,6 +74,10 @@ editUser(userId:number){
  }
 }
 SaveUsers(){
+  if(this.filePath==undefined||this.filePath==null){
+    alert("please select a file.");
+    return;
+  }  
  const usersDTO:UsersDTO={
   firstName:$('input[id="txtFirstName"]').val(),
   lastName:$('input[id="txtLName"]').val(),
@@ -83,9 +85,9 @@ SaveUsers(){
   address: $('textarea[id="txtAdd"]').val(),
   contact:$('input[id="txtCont"]').val(),
   gender:$('input[name="Gender"]:checked').val(),
-  PortalAlias:'DBM',
-  
-  userId:$('input[id="lblUserId"]').val()==""?0:parseInt($('input[id="lblUserId"]').val())
+  PortalAlias:'DBM',  
+  userId:$('input[id="lblUserId"]').val()==""?0:parseInt($('input[id="lblUserId"]').val()),
+  image:this.filePath
  }
  
   if(this.ValidateDetails(usersDTO)==true){
@@ -184,5 +186,14 @@ navigateToUser(userId:number){
   }
   this.route.navigate(['/user',userId]);
   return false;
+}
+
+onFilesSelected(event:any){
+  const file:File=event.target.files[0];
+  const reader=new FileReader();
+  reader.onload=(e:any)=>{
+    this.filePath = e.target.result;
+  }
+  reader.readAsDataURL(file);
 }
 }
