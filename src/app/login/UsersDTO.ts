@@ -7,5 +7,6 @@ export interface UsersDTO{
     contact:string;   
     PortalAlias:string; 
     userId:number,
-    image:string
+    image:string,
+    zipCode:string
 }

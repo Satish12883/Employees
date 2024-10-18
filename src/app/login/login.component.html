@@ -1,66 +1,76 @@
-<div style="text-align: center;display: none;">
-    <table align="center">
-       <thead>
-        <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-       </thead>
-       <tbody>
-        <tr>
-            <td><label>FirstName</label></td>
-            <td>:</td>
-            <td><input type="text" id="txtFN" value="satish" #inputFistName> </td>
-        </tr>
-        <tr>
-            <td><label>LastName</label></td>
-            <td>:</td>
-            <td><input type="text" id="txtLN" required></td>
-        </tr>
-        <tr>
-            <td><label>Gender</label></td>
-            <td>:</td>
-            <td align="left">&nbsp;
-                <input type="radio" id="rdbMale" value="Male" name="gender">&nbsp;
-                <input type="radio" id="rdbFM" value="Female" name="gender">
-            </td>
-        </tr>
-        <tr>
-            <td><label>Address</label></td>
-            <td>:</td>
-            <td><input type="text" id="txtAdd"></td>
-        </tr>
-       </tbody>
-    </table>
-<input type="button" id="btnSave" value="Save" class="btn btn-success">
+<div class="navbar">
+    <div class="nav-links">
+        <a href="#home" class="active">Home</a>
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+    </div>
+    <div class="search-container">
+        <input type="text" placeholder="Search..." name="search">
+        <button type="submit">Search</button>
+    </div>
 </div>
 
 <div id="MainDiv">
     <div id="divForm">
+        <div id="title">
+            <h3>User Registration</h3>
+        </div><hr>
         <form>
-        <label id="ErrorMsg"></label><br><br>
-        <label for="name">userId:</label>&nbsp;
-         <input type="text" id="lblUserId" name="name"size="1px"><br>
-        <label>FirstName:</label><br>
-        <input type="text" id="txtFirstName"><br>
-        <label>LastName:</label><br>
-        <input type="text" id="txtLName"><br>
-        <label>Age:</label><br>
-        <input type="text" id="txtAge"><br>
-        <label>Gender:</label><br>
-        <input type="radio" id="rdbMale" value="Male" name="Gender">Male&nbsp;
-        <input type="radio" id="rdbFeMale" value="Female" name="Gender">Female<br>
-        <label>Contact:</label><br>
-        <input type="text" id="txtCont"><br>
-        <label>Address:</label><br>
-        <textarea id="txtAdd"></textarea><br>
-        <label>Image:</label>
-        <input type="file" id="fileupload" accept="image/*" (change)="onFilesSelected($event)"><br><br>        
-        <input type="button" id="btnSave" (click)="SaveUsers()" value="Save">
-    
+            <label id="ErrorMsg"></label>
+
+            <div class="form-group">
+                <label for="lblUserId">User ID:</label>
+                <label id="lblUserId"></label>
+            </div>
+            <div class="form-group name-group">
+                <div>
+                    <label for="txtFirstName">First Name:</label>
+                    <input type="text" id="txtFirstName" required>
+                </div>
+                <div>
+                    <label for="txtLName">Last Name:</label>
+                    <input type="text" id="txtLName" required>
+                </div>
+            </div>
+            <div class="form-group name-group">
+                <div>
+                    <label for="txtAge">Age:</label>
+                <input type="number" id="txtAge" min="0" required>
+                </div>
+                <div>
+                    <label >Gender:</label>
+                    <label align="center"><input type="radio" id="rdbMale" value="Male" name="Gender" required>Male &nbsp;
+                        <input type="radio" id="rdbFeMale" value="Female" name="Gender" required>Female
+                    </label>
+                </div>
+                
+            </div>            
+
+            <div class="form-group name-group">
+                <div>
+                    <label for="txtCont">Contact:</label>
+                <input type="text" id="txtCont" required>
+                </div>       
+                <div>
+                    <label for="txtZipCode">ZipCode</label>
+                <input type="text" id="txtZipCode" required>
+                </div>         
+            </div>
+            <div class="form-group">
+                <label for="txtAdd">Address:</label>
+                <textarea id="txtAdd" rows="4" cols="50" placeholder="Enter your address..." required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="fileupload">Image:</label>
+                <input type="file" id="fileupload" accept="image/*" (change)="onFilesSelected($event)">
+            </div>
+            <input type="button" id="btnSave" (click)="SaveUsers()" value="Save"><br>
+            <!-- <input type="button" id="btnSaveJson" (click)="SaveUsersJson()" value="Submit"> -->
         </form>
-    </div>   
+    </div>
+
+
 </div><br>
 <div style="width: 100%;display: flex;justify-content: center;">
     <a href="#" id="ancUsers" (click)="getData()">Show</a>
@@ -68,27 +78,29 @@
         <table class="tblUsers">
             <thead>
                 <tr>
-                <th>UserId</th>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>Age</th>
-                <th>Gender</th>
-                <th>contact</th>
-                <td>Address</td>
-                <th></th>
-                <th></th>
+                    <th>UserId</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Contact</th>
+                    <th>ZipCode</th>
+                    <td>Address</td>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let user of users">
                     <td>{{user.userId}}</td>
                     <td><a href="#" (click)="navigateToUser(user.userId)" id="btnView">{{user.firstName}}</a></td>
-                    <td>{{user.lastName}}</td>    
-                    <td>{{user.age}}</td>            
+                    <td>{{user.lastName}}</td>
+                    <td>{{user.age}}</td>
                     <td>{{user.gender}}</td>
                     <td>{{user.contact}}</td>
+                    <td>{{user.zipCode}}</td>
                     <td>{{user.address}}</td>
-                     <td><a href="#" id="btnEdit" (click)="editUser(user.userId)">Edit</a> </td>
+                    <td><a href="#" id="btnEdit" (click)="editUser(user.userId)">Edit</a> </td>
                     <td><a href="#" id="btnDelete" (click)="DeleteUser(user.userId)">Delete</a></td>
                 </tr>
             </tbody>
@@ -98,6 +110,6 @@
 
 <div style="display: none;">
     <h5 id="Msg"> {{ name }}</h5>
-<p>Age: {{ age }}</p>
-<p>{{address}}</p>
+    <p>Age: {{ age }}</p>
+    <p>{{address}}</p>
 </div>

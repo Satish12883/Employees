@@ -1,0 +1,28 @@
+<p>employees works!</p>
+
+<div id="MainDiv">
+    <div id="divForm">
+        <form>
+        <label id="ErrorMsg"></label><br><br>
+        <label for="name">userId:</label>&nbsp;
+         <input type="text" id="lblUserId" name="name"size="1px"><br>
+        <label>FirstName:</label><br>
+        <input type="text" id="txtFirstName"><br>
+        <label>LastName:</label><br>
+        <input type="text" id="txtLName"><br>
+        <label>Age:</label><br>
+        <input type="text" id="txtAge"><br>
+        <label>Gender:</label><br>
+        <input type="radio" id="rdbMale" value="Male" name="Gender">Male&nbsp;
+        <input type="radio" id="rdbFeMale" value="Female" name="Gender">Female<br>
+        <label>Contact:</label><br>
+        <input type="text" id="txtCont"><br>
+        <label>Address:</label><br>
+        <textarea id="txtAdd"></textarea><br>
+        <label>Image:</label>
+        <input type="file" id="fileupload"><br><br>        
+        <input type="button" id="btnSave" (click)="getUsers()" value="Save">
+    
+        </form>
+    </div>   
+</div><br>

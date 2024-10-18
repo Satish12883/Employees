@@ -54,11 +54,12 @@ editUser(userId:number){
       return;
     }
     this.usersById=data;
-    $('input[id="lblUserId"]').val(this.usersById[0].userId);
+    $('label[id="lblUserId"]').text(this.usersById[0].userId);
     $('input[id="txtFirstName"]').val(this.usersById[0].firstName);
     $('input[id="txtLName"]').val(this.usersById[0].lastName);
     $('input[id="txtAge"]').val(this.usersById[0].age);
     $('input[id="txtCont"]').val(this.usersById[0].contact);
+    $('input[id="txtZipCode"]').val(this.usersById[0].zipCode);
     $('textarea[id="txtAdd"]').val(this.usersById[0].address);
     if(this.usersById[0].gender.toUpperCase()=="MALE" || this.usersById[0].gender.toUpperCase()=="M"){
       $('input[id="rdbMale"][value="Male"]').prop("checked",true);
@@ -74,10 +75,10 @@ editUser(userId:number){
  }
 }
 SaveUsers(){
-  if(this.filePath==undefined||this.filePath==null){
-    alert("please select a file.");
-    return;
-  }  
+  // if(this.filePath==undefined||this.filePath==null){
+  //   alert("please select a file.");
+  //   return;
+  // }  
  const usersDTO:UsersDTO={
   firstName:$('input[id="txtFirstName"]').val(),
   lastName:$('input[id="txtLName"]').val(),
@@ -85,8 +86,9 @@ SaveUsers(){
   address: $('textarea[id="txtAdd"]').val(),
   contact:$('input[id="txtCont"]').val(),
   gender:$('input[name="Gender"]:checked').val(),
-  PortalAlias:'DBM',  
-  userId:$('input[id="lblUserId"]').val()==""?0:parseInt($('input[id="lblUserId"]').val()),
+  PortalAlias:'DBM', 
+  zipCode:$('input[id="txtZipCode"]').val(),
+  userId : parseInt($('label[id="lblUserId"]').text()),
   image:this.filePath
  }
  
@@ -195,5 +197,39 @@ onFilesSelected(event:any){
     this.filePath = e.target.result;
   }
   reader.readAsDataURL(file);
+}
+
+SaveUsersJson(){
+  // if(this.filePath==undefined||this.filePath==null){
+  //   alert("please select a file.");
+  //   return;
+  // }  
+ const usersDTO:UsersDTO={
+  firstName:$('input[id="txtFirstName"]').val(),
+  lastName:$('input[id="txtLName"]').val(),
+  age:$('input[id="txtAge"]').val(),
+  address: $('textarea[id="txtAdd"]').val(),
+  contact:$('input[id="txtCont"]').val(),
+  gender:$('input[name="Gender"]:checked').val(),
+  PortalAlias:'DBM', 
+  zipCode:$('input[id="txtZipCode"]').val(),
+  userId : parseInt($('label[id="lblUserId"]').text()) || 0,
+  image:this.filePath
+ }
+ 
+  if(this.ValidateDetails(usersDTO)==true){
+     this.service.SaveUsersJson(usersDTO);
+      // const resultData=parseInt(this.result.ResultData);
+      // if(resultData==1){
+      //   alert(this.result.ErrorDescription);
+      //   this.getData();
+      //   this.ClearFileds();
+      //   $('input[id="btnSave"]').val('Update');
+      // }
+      // if(resultData==0){
+      //   alert(this.result.ErrorDescription);
+      // }
+      console.log(this.result);
+ }
 }
 }

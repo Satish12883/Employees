@@ -75,4 +75,24 @@ export class ServiceAPIService {
       alert(error);
     });
   }
+
+
+  getUsers(){
+    const URL='assets/users.json';
+    return fetch(URL).then(response=>{
+      if(!response.ok){
+        console.log("Error While Fetching data");
+      }
+      return response.text();
+    }).catch(error=>{
+      alert(error);
+    });
+  }
+
+  SaveUsersJson(usersDTO: UsersDTO): void {
+    const url="assets/users.json";
+  const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+  existingUsers.push(usersDTO);
+  localStorage.setItem('users', JSON.stringify(existingUsers));  
+}
 }
